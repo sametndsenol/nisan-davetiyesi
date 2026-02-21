@@ -133,3 +133,36 @@ function initScrollAnimations() {
         });
     }, 100);
 }
+
+// Takvime Ekle Butonu İşlevi (ICS dosyası indirme)
+function addToCalendar(e) {
+    e.preventDefault();
+    
+    // Örnek etkinlik bilgileri
+    const event = {
+        title: 'Büşra & Mehmet Nişan Töreni',
+        description: 'Bu özel günümüzde sizleri de aramızda görmekten mutluluk duyarız.',
+        location: 'Queen\'s Garden Davet Evi & Organizasyon, Bağcılar, İstanbul',
+        startDate: '20260503T140000',
+        endDate: '20260503T180000'
+    };
+
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:${event.startDate}
+DTEND:${event.endDate}
+SUMMARY:${event.title}
+DESCRIPTION:${event.description}
+LOCATION:${event.location}
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = 'Busra_Mehmet_Nisan.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
