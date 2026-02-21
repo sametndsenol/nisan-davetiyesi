@@ -319,7 +319,7 @@ body {
 /* --- Kaydırma Oku --- */
 .scroll-arrow {
     position: absolute;
-    left: 10%;
+    right: 10%;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -630,7 +630,7 @@ body {
     .vertical-separator .line { height: 25px; }
 
     .scroll-arrow {
-        left: 5%;
+        right: 5%;
         top: 60%;
     }
 }
