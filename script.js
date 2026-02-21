@@ -90,9 +90,9 @@ function createParticles() {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
-        // Rastgele özellikler oluşturma
+        // Rastgele özellikler oluşturma (Işıltıları daha ortada toplamak için X pozisyonunu ayarladık)
         const size = Math.random() * 3 + 1; // 1px ile 4px arası boyut
-        const posX = Math.random() * 100; // Yatay eksende rastgele pozisyon (%)
+        const posX = 15 + Math.random() * 70; // Yatay eksende %15 ile %85 arası pozisyon
         const delay = Math.random() * 15; // Animasyona başlama gecikmesi (0-15 saniye)
         const duration = Math.random() * 10 + 10; // Yukarı çıkma süresi (10-20 saniye)
         
