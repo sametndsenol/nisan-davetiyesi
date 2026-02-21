@@ -315,6 +315,27 @@ body {
     padding-left: 30px;
 }
 
+/* --- Kaydırma Oku --- */
+.scroll-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: -20px;
+    opacity: 0.6;
+    animation: bounce-arrow 2s infinite ease-in-out;
+}
+
+.scroll-arrow i {
+    font-size: 24px;
+    color: var(--gold);
+}
+
+@keyframes bounce-arrow {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(10px); opacity: 0.8; }
+}
+
 /* --- Aileler Tasarımı (YAN YANA SİMETRİK) --- */
 .parents-section {
     margin-bottom: 60px;
