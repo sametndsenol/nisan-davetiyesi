@@ -449,8 +449,11 @@ body {
 
 .heart-icon {
     font-size: 22px;
-    color: var(--accent-color);
+    color: var(--accent-red);
     animation: heartbeat 1.5s infinite;
+    display: inline-block;
+    margin-bottom: 20px;
+    line-height: 1; /* Kalbin yamulmasını önler */
 }
 
 @keyframes heartbeat {

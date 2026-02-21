@@ -15,8 +15,8 @@
         <source src="krasnoshchok-wedding-romantic-love-music-409293.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Sabit Ses Butonu -->
-    <button id="musicToggle" class="music-btn hidden" onclick="toggleMusic()">
+    <!-- Sabit Ses Butonu (Artık gizli, görünmüyor) -->
+    <button id="musicToggle" class="music-btn hidden" onclick="toggleMusic()" style="display: none;">
         <i class="fas fa-volume-mute"></i>
     </button>
     <div id="particles-container" class="particles-container"></div>
@@ -132,9 +132,12 @@
         <!-- Konum Bölümü -->
         <section class="location-section animate-on-scroll fade-up delay-1">
             <h2 class="section-title">Konum</h2>
+            <p class="venue-name" style="font-family: var(--font-serif); font-size: 20px; color: var(--text-dark); margin-bottom: 5px;">Queen's Garden Davet Evi & Organizasyon</p>
+            <p class="venue-address" style="font-family: var(--font-sans); font-size: 11px; color: #777; margin-bottom: 25px;">Fatih, Velioğlu Cd. No:98, 34204 Bağcılar/İstanbul</p>
+            
             <div class="map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1504.389125989532!2d28.83922133875466!3d41.05197811552917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa540ebb99a51%3A0xa12e8db660983959!2zRmF0aWgsIFZlbGlvxJ9sdSBDZC4gTm86OTggRDpnLCAzNDIwNCBCYcSfY8SxbGFyL8Swc3RhbmJ1bA!5e0!3m2!1sen!2str!4v1771644235287!5m2!1sen!2str" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1504.3891830553596!2d28.83979387033213!3d41.05197561990084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa588e3edfc07%3A0xea982cd0691276a9!2sQueen&#39;s%20Garden%20Davet%20Evi%20%26%20Organizasyon!5e0!3m2!1sen!2str!4v1771648996735!5m2!1sen!2str" 
                     width="100%" 
                     height="100%" 
                     style="border:0;" 
@@ -143,9 +146,16 @@
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Fatih,+Velioğlu+Cd.+No:98,+Bağcılar/İstanbul" target="_blank" class="map-button">
-                Haritada Aç
-            </a>
+            
+            <!-- Aksiyon Butonları -->
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; width: 100%;">
+                <a href="https://maps.app.goo.gl/eaEiXyAXhFVd2jjKA" target="_blank" class="map-button" style="flex: 1; max-width: 180px; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fas fa-map-marker-alt"></i> Haritada Aç
+                </a>
+                <a href="#" class="map-button" onclick="addToCalendar(event)" style="flex: 1; max-width: 180px; text-align: center; background-color: transparent; color: var(--accent-red); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="far fa-calendar-alt"></i> Takvime Ekle
+                </a>
+            </div>
         </section>
         
         <footer class="footer animate-on-scroll scale-up">
