@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Büşra & Mehmet | Nişan Davetiyesi</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Zarif yazı tipleri için Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Müzik Çalar (Özel Seçilen Müzik) -->
+    <audio id="bgMusic" loop>
+        <source src="krasnoshchok-wedding-romantic-love-music-409293.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Sabit Ses Butonu -->
+    <button id="musicToggle" class="music-btn hidden" onclick="toggleMusic()">
+        <i class="fas fa-volume-mute"></i>
+    </button>
+    <div id="particles-container" class="particles-container"></div>
+
+    <!-- Açılış Ekranı (Mühürlü Zarf Görünümü) -->
+    <div id="intro-overlay" class="overlay">
+        <div class="envelope-top" id="envelope-top"></div>
+        <div class="envelope-bottom" id="envelope-bottom"></div>
+        <div class="envelope-content">
+            <div class="seal" id="seal" onclick="openInvitation()">
+                <span>B&M</span>
+            </div>
+            <p class="click-text" id="click-text">Davetiyeyi açmak için mühre dokunun</p>
+        </div>
+    </div>
+
+    <!-- Ana Davetiye İçeriği -->
+    <div class="invitation-container" id="main-content">
+        <!-- Dekoratif üst çerçeve çizgisi -->
+        <div class="decorative-border top"></div>
+
+        <header class="header animate-on-scroll fade-up">
+            <p class="top-text">Birlikte atılan en güzel adım...</p>
+        </header>
+
+        <section class="names-section animate-on-scroll scale-up delay-1">
+            <h1 class="names">Büşra <span class="ampersand">&</span> Mehmet</h1>
+        </section>
+
+        <section class="message-section animate-on-scroll fade-up delay-2">
+            <p class="message">
+                Bir ömür sürecek hikâyemizin ilk<br>
+                adımını birlikte atıyoruz.<br><br>
+                Bu özel günümüzde sizleri aramızda<br>
+                görmekten mutluluk duyarız.
+            </p>
+        </section>
+
+        <!-- Tarih Bölümü -->
+        <section class="details-section animate-on-scroll fade-up">
+            <div class="date-box">
+                <span class="day">03</span>
+                <div class="month-year">
+                    <span>MAYIS</span>
+                    <span>2026</span>
+                </div>
+                <span class="weekday">PAZAR</span>
+            </div>
+        </section>
+
+        <!-- Aileler Bölümü (Yan Yana ve Simetrik) -->
+        <section class="parents-section">
+            <div class="parents">
+                <!-- Kız Tarafı (Soldan gelir, sağa yaslıdır) -->
+                <div class="family family-left animate-on-scroll slide-in-left delay-1">
+                    <p class="family-title">Kız Tarafı</p>
+                    <p class="parents-names">Fikriye & Yılmaz Taş</p>
+                </div>
+                
+                <!-- Dikey zarif ayırıcı (Ortadan büyüyerek gelir) -->
+                <div class="vertical-separator animate-on-scroll scale-up delay-2">
+                    <div class="line"></div>
+                    <div class="diamond"></div>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Erkek Tarafı (Sağdan gelir, sola yaslıdır) -->
+                <div class="family family-right animate-on-scroll slide-in-right delay-1">
+                    <p class="family-title">Erkek Tarafı</p>
+                    <p class="parents-names">Hatice & Cumali Gezer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Akış / Program (Timeline) -->
+        <section class="timeline-section animate-on-scroll fade-up delay-1">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-user-friends"></i></div>
+                    <div class="timeline-content">
+                        <span class="time-badge">14:00</span>
+                        <h3>Karşılama</h3>
+                        <p>Misafirlerimizin salona teşrifi</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-ring"></i></div>
+                    <div class="timeline-content">
+                        <span class="time-badge">15:00</span>
+                        <h3>Yüzük Merasimi</h3>
+                        <p>Nişan yüzüklerinin takılması</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-glass-cheers"></i></div>
+                    <div class="timeline-content">
+                        <span class="time-badge">16:00</span>
+                        <h3>İkram & Müzik</h3>
+                        <p>İkramlıklar eşliğinde eğlence</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-camera"></i></div>
+                    <div class="timeline-content">
+                        <span class="time-badge">18:00</span>
+                        <h3>Kapanış</h3>
+                        <p>Fotoğraf çekimi ve veda</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Konum Bölümü -->
+        <section class="location-section animate-on-scroll fade-up delay-1">
+            <h2 class="section-title">Konum</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1504.389125989532!2d28.83922133875466!3d41.05197811552917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa540ebb99a51%3A0xa12e8db660983959!2zRmF0aWgsIFZlbGlvxJ9sdSBDZC4gTm86OTggRDpnLCAzNDIwNCBCYcSfY8SxbGFyL8Swc3RhbmJ1bA!5e0!3m2!1sen!2str!4v1771644235287!5m2!1sen!2str" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Fatih,+Velioğlu+Cd.+No:98,+Bağcılar/İstanbul" target="_blank" class="map-button">
+                Haritada Aç
+            </a>
+        </section>
+        
+        <footer class="footer animate-on-scroll scale-up">
+            <div class="heart-icon">♥</div>
+        </footer>
+
+        <!-- Dekoratif alt çerçeve çizgisi -->
+        <div class="decorative-border bottom"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
