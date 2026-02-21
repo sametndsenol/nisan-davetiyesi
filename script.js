@@ -134,35 +134,26 @@ function initScrollAnimations() {
     }, 100);
 }
 
-// Takvime Ekle Butonu İşlevi (ICS dosyası indirme)
+// Takvime Ekle Butonu İşlevi
 function addToCalendar(e) {
     e.preventDefault();
     
-    // Örnek etkinlik bilgileri
-    const event = {
-        title: 'Büşra & Mehmet Nişan Töreni',
-        description: 'Bu özel günümüzde sizleri de aramızda görmekten mutluluk duyarız.',
-        location: 'Queen\'s Garden Davet Evi & Organizasyon, Bağcılar, İstanbul',
-        startDate: '20260503T140000',
-        endDate: '20260503T180000'
-    };
-
-    const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-BEGIN:VEVENT
-DTSTART:${event.startDate}
-DTEND:${event.endDate}
-SUMMARY:${event.title}
-DESCRIPTION:${event.description}
-LOCATION:${event.location}
-END:VEVENT
-END:VCALENDAR`;
-
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = 'Busra_Mehmet_Nisan.ics';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const title = encodeURIComponent('Büşra & Mehmet Nişan Töreni');
+    const details = encodeURIComponent('Bu özel günümüzde sizleri de aramızda görmekten mutluluk duyarız.');
+    const location = encodeURIComponent("Queen's Garden Davet Evi & Organizasyon, Bağcılar, İstanbul");
+    // Türkiye saati UTC+3 olduğu için 14:00 -> 11:00 UTC, 18:00 -> 15:00 UTC
+    const dates = '20260503T110000Z/20260503T150000Z';
+    
+    // Cihazın iPhone/iPad (iOS) olup olmadığını kontrol et
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    
+    if (isIOS) {
+        // Apple (iOS) cihazlar için .ics dosyasını direkt takvim uygulamasında açar
+        const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:20260503T110000Z\nDTEND:20260503T150000Z\nSUMMARY:Büşra & Mehmet Nişan Töreni\nDESCRIPTION:Bu özel günümüzde sizleri de aramızda görmekten mutluluk duyarız.\nLOCATION:Queen's Garden Davet Evi & Organizasyon, Bağcılar, İstanbul\nEND:VEVENT\nEND:VCALENDAR`;
+        window.location.href = "data:text/calendar;charset=utf8," + encodeURIComponent(icsContent);
+    } else {
+        // Android ve Bilgisayarlar için doğrudan Google Takvim sayfasını (uygulamasını) açar
+        const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${details}&location=${location}`;
+        window.open(googleCalendarUrl, '_blank');
+    }
 }
