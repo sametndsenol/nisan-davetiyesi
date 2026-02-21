@@ -276,6 +276,7 @@ body {
     margin-bottom: 60px;
     display: flex;
     justify-content: center;
+    position: relative; /* Ok için eklendi */
 }
 
 .date-box {
@@ -317,23 +318,45 @@ body {
 
 /* --- Kaydırma Oku --- */
 .scroll-arrow {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
-    margin-top: -20px;
-    opacity: 0.6;
+    opacity: 0.8;
     animation: bounce-arrow 2s infinite ease-in-out;
 }
 
+.scroll-text {
+    font-family: var(--font-sans);
+    font-size: 8px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin-bottom: 5px;
+    opacity: 0.9;
+}
+
+/* Uzun ince ok çizgisi */
+.scroll-line {
+    width: 1px;
+    height: 30px;
+    background-color: var(--gold);
+    margin-bottom: -2px;
+}
+
 .scroll-arrow i {
-    font-size: 24px;
+    font-size: 14px;
     color: var(--gold);
 }
 
 @keyframes bounce-arrow {
-    0%, 100% { transform: translateY(0); opacity: 0.3; }
-    50% { transform: translateY(10px); opacity: 0.8; }
+    0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-50%) translateY(10px); opacity: 1; }
 }
 
 /* --- Aileler Tasarımı (YAN YANA SİMETRİK) --- */
@@ -605,4 +628,9 @@ body {
     .family-title { font-size: 9px; letter-spacing: 2px; }
     .vertical-separator { margin: 0 5px; }
     .vertical-separator .line { height: 25px; }
+
+    .scroll-arrow {
+        left: 5%;
+        top: 60%;
+    }
 }
