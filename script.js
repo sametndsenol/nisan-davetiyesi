@@ -3,6 +3,8 @@ let musicPlaying = false;
 let audio;
 let musicBtn;
 let musicIcon;
+let autoOpenTimeout; // Otomatik açılış zamanlayıcısı
+let isOpened = false;
 
 // Sayfa yüklendiğinde çalışacaklar
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,16 +22,30 @@ document.addEventListener('DOMContentLoaded', () => {
     
     setVh();
     window.addEventListener('resize', setVh);
+
+    // 10 Saniye boyunca hiçbir işlem yapılmazsa otomatik açılma
+    autoOpenTimeout = setTimeout(() => {
+        if (!isOpened) {
+            autoOpenAndScroll();
+        }
+    }, 10000); // 10 saniye (10000 ms)
 });
 
+// Kullanıcı 10 saniye beklemeden kendisi tıklarsa çalışan normal açılış
 function openInvitation() {
+    if (isOpened) return;
+    isOpened = true;
+    
+    // Kullanıcı tıkladığı için otomatik açılışı iptal et
+    clearTimeout(autoOpenTimeout);
+    
     const overlay = document.getElementById('intro-overlay');
     const mainContent = document.getElementById('main-content');
     
     // Zarf açılış animasyonunu tetikle
     overlay.classList.add('opened');
     
-    // Müzik butonunu görünür yap ve HEMEN çalmayı dene (Tarayıcı engeline takılmamak için tıklama anında başlamalı)
+    // Müzik butonunu görünür yap ve HEMEN çalmayı dene
     if (musicBtn) {
         musicBtn.classList.remove('hidden');
         playMusic(); 
@@ -40,13 +56,43 @@ function openInvitation() {
         overlay.classList.add('hidden');
         mainContent.classList.add('visible');
         
-        // Animasyonları başlat
         setTimeout(initScrollAnimations, 100);
+        createParticles();
+        window.scrollTo(0, 0);
+    }, 1200); 
+}
+
+// 10 Saniye dolduğunda çalışan otomatik açılış ve aşağı kaydırma
+function autoOpenAndScroll() {
+    if (isOpened) return;
+    isOpened = true;
+    
+    const overlay = document.getElementById('intro-overlay');
+    const mainContent = document.getElementById('main-content');
+    
+    overlay.classList.add('opened');
+    
+    if (musicBtn) {
+        musicBtn.classList.remove('hidden');
+        // Tarayıcılar genelde otomatik ses oynatmayı engeller ama şansımızı deniyoruz.
+        playMusic(); 
+    }
+    
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+        mainContent.classList.add('visible');
         
-        // Parçacık (particle) efektini başlat
+        setTimeout(initScrollAnimations, 100);
         createParticles();
         
-        window.scrollTo(0, 0);
+        // Zarf tamamen açıldıktan 1.5 saniye sonra yavaşça aşağı kaydır
+        setTimeout(() => {
+            window.scrollBy({
+                top: window.innerHeight * 0.7, // Ekranın %70'i kadar aşağı
+                behavior: 'smooth'
+            });
+        }, 1500);
+        
     }, 1200); 
 }
 
