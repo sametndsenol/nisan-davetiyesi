@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isOpened) {
             autoOpenAndScroll();
         }
-    }, 10000); // 10 saniye (10000 ms)
+    }, 5000); // 10 saniye (10000 ms)
 });
 
 // Kullanıcı 10 saniye beklemeden kendisi tıklarsa çalışan normal açılış
@@ -58,7 +58,12 @@ function openInvitation() {
         
         setTimeout(initScrollAnimations, 100);
         createParticles();
-        window.scrollTo(0, 0);
+        
+        // Zarf tamamen açıldıktan 1.5 saniye sonra yavaşça aşağı kaydır (Kullanıcı kendi açsa da)
+        setTimeout(() => {
+            // Ekranın %80'i kadar aşağı, 4 saniye (4000ms) sürecek yavaş ve sinematik bir kaydırma
+            smoothSlowScroll(window.innerHeight * 0.8, 4000);
+        }, 1500);
     }, 1200); 
 }
 
@@ -98,10 +103,26 @@ function autoOpenAndScroll() {
     
     overlay.classList.add('opened');
     
+    // Müzik çalmayı dener, ancak tarayıcı izinsiz çalmaya izin vermeyebilir.
+    // Bu yüzden eğer ekranın herhangi bir yerine tıklanırsa müziği başlatacak bir dinleyici ekliyoruz.
     if (musicBtn) {
         musicBtn.classList.remove('hidden');
-        // Tarayıcılar genelde otomatik ses oynatmayı engeller ama şansımızı deniyoruz.
+        
         playMusic(); 
+        
+        // Ekrana ilk dokunmada müziği çal (Eğer oto-play engellendiyse)
+        document.body.addEventListener('click', function playOnFirstClick() {
+            if (!musicPlaying) playMusic();
+            document.body.removeEventListener('click', playOnFirstClick);
+        });
+        document.body.addEventListener('touchstart', function playOnFirstTouch() {
+            if (!musicPlaying) playMusic();
+            document.body.removeEventListener('touchstart', playOnFirstTouch);
+        });
+        document.body.addEventListener('scroll', function playOnFirstScroll() {
+            if (!musicPlaying) playMusic();
+            document.body.removeEventListener('scroll', playOnFirstScroll);
+        });
     }
     
     setTimeout(() => {
