@@ -62,6 +62,32 @@ function openInvitation() {
     }, 1200); 
 }
 
+// Yavaş ve pürüzsüz kaydırma fonksiyonu
+function smoothSlowScroll(targetPosition, duration) {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        // Easing function (ease-in-out)
+        const ease = progress < 0.5 
+            ? 2 * progress * progress 
+            : -1 + (4 - 2 * progress) * progress;
+            
+        window.scrollTo(0, startPosition + distance * ease);
+        
+        if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+        }
+    }
+    
+    requestAnimationFrame(animation);
+}
+
 // 10 Saniye dolduğunda çalışan otomatik açılış ve aşağı kaydırma
 function autoOpenAndScroll() {
     if (isOpened) return;
@@ -87,10 +113,8 @@ function autoOpenAndScroll() {
         
         // Zarf tamamen açıldıktan 1.5 saniye sonra yavaşça aşağı kaydır
         setTimeout(() => {
-            window.scrollBy({
-                top: window.innerHeight * 0.7, // Ekranın %70'i kadar aşağı
-                behavior: 'smooth'
-            });
+            // Ekranın %80'i kadar aşağı, 4 saniye (4000ms) sürecek yavaş ve sinematik bir kaydırma
+            smoothSlowScroll(window.innerHeight * 0.8, 4000);
         }, 1500);
         
     }, 1200); 
