@@ -351,36 +351,40 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    opacity: 0.8;
+    opacity: 1;
     animation: bounce-arrow 2s infinite ease-in-out;
 }
 
 .scroll-text {
     font-family: var(--font-sans);
-    font-size: 8px;
+    font-size: 10px;
+    font-weight: 500;
     color: var(--gold);
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    margin-bottom: 5px;
-    opacity: 0.9;
+    margin-bottom: 8px;
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(182, 141, 64, 0.4); /* Tema ile uyumlu zarif bir parlama */
 }
 
 /* Uzun ince ok çizgisi */
 .scroll-line {
-    width: 1px;
-    height: 30px;
+    width: 1.5px;
+    height: 40px;
     background-color: var(--gold);
     margin-bottom: -2px;
+    box-shadow: 0 0 5px rgba(182, 141, 64, 0.3);
 }
 
 .scroll-arrow i {
-    font-size: 14px;
+    font-size: 18px;
     color: var(--gold);
+    text-shadow: 0 0 8px rgba(182, 141, 64, 0.4);
 }
 
 @keyframes bounce-arrow {
-    0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.5; }
+    0%, 100% { transform: translateY(-50%) translateY(0); opacity: 0.6; }
     50% { transform: translateY(-50%) translateY(10px); opacity: 1; }
 }
 
